@@ -22,12 +22,42 @@ class DisplayCompressedImagesPage extends StatefulWidget {
 
 class _DisplayCompressedImagesPageState
     extends State<DisplayCompressedImagesPage> {
-  
+  final GlobalKey<ScaffoldState> _scaffoldKey=GlobalKey<ScaffoldState>();
+
+  void _saveAllImages() async {
+    for (int i = 0; i < widget.compressedImages.length; i++) {
+      try {
+        final result = await ImageGallerySaver.saveFile(
+          widget.compressedImages[i].path,
+        );
+        if (result != null && result.isNotEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Images saved to gallery'),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Failed to save images'),
+            ),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: $e'),
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final size=MediaQuery.of(context).size;
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Compressed Images"),
       ),
@@ -88,6 +118,11 @@ class _DisplayCompressedImagesPageState
                   );
                   }
               ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _saveAllImages,
+              child: Text('Save All'),
             ),
           ],
         ),
