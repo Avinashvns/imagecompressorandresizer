@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:imagecompressorandresizer/page/compress.dart';
+import 'package:imagecompressorandresizer/utils/color.dart';
 import 'package:imagecompressorandresizer/widget/clip_clipper.dart';
 
 void main() {
@@ -21,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.brown.shade200,
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: Container(
           child: SingleChildScrollView(
@@ -31,7 +33,7 @@ class _MyAppState extends State<MyApp> {
                 Stack(
                   children: [
                     Opacity(
-                      opacity: 0.5,
+                      opacity: 0.4,
                       child: ClipPath(
                         clipper: ClipsClipper(),
                         child: Container(
@@ -44,7 +46,7 @@ class _MyAppState extends State<MyApp> {
                       clipper: ClipsClipper(),
                       child: Container(
                         height: size.height / 2.05,
-                        color: Colors.red,
+                        color: Colors.brown.shade500,
                       ),
                     ),
                   ],
@@ -77,6 +79,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                   onTap: () {
                     print("Compress Image");
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CompressPage(),));
                   },
                 ),
 
