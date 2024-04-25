@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imagecompressorandresizer/widget/clip_clipper.dart';
 
@@ -27,12 +28,26 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               children: [
                 // Container
-                ClipPath(
-                  clipper: ClipsClipper(),
-                  child: Container(
-                    height: size.height / 2,
-                    color: Colors.red,
-                  ),
+                Stack(
+                  children: [
+                    Opacity(
+                      opacity: 0.5,
+                      child: ClipPath(
+                        clipper: ClipsClipper(),
+                        child: Container(
+                          height: size.height / 2,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    ClipPath(
+                      clipper: ClipsClipper(),
+                      child: Container(
+                        height: size.height / 2.05,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ],
                 ),
 
                 SizedBox(
