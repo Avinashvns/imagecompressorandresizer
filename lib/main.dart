@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imagecompressorandresizer/page/compress.dart';
+import 'package:imagecompressorandresizer/page/crop.dart';
 import 'package:imagecompressorandresizer/utils/color.dart';
 import 'package:imagecompressorandresizer/widget/clip_clipper.dart';
 
@@ -132,6 +133,8 @@ class _MyAppState extends State<MyApp> {
                   ),
                   onTap: () {
                     print("Crop Image");
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>CropPage()));
                   },
                 ),
 
